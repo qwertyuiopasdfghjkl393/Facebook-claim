@@ -1,0 +1,130 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account Sign Up</title>
+  <style>
+    body {
+      background: #f0f2f5;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .signup-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+
+    .signup-container h2 {
+      margin-bottom: 20px;
+      color: #1877f2;
+    }
+
+    .signup-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .signup-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .signup-container button:hover {
+      background-color: #155db2;
+    }
+
+    .success-message {
+      color: green;
+      text-align: center;
+      display: none;
+      margin: 15px 0;
+    }
+
+    .login-link {
+      margin-top: 20px;
+      color: #65676b;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      color: #1877f2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .divider {
+      border-top: 1px solid #dadde1;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Create facebook earning Account</h2>
+    <form id="signupForm">
+      <input type="text" placeholder="Full Name" id="fullname" required />
+      <input type="email" placeholder="Email" id="email" required />
+      <input type="password" placeholder="Password" id="password" required />
+      <button type="submit">Sign Up</button>
+      <p class="success-message" id="successMsg">Account created successfully! Redirecting...</p>
+    </form>
+    
+    <div class="divider"></div>
+    
+    <div class="login-link">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (name && email && password) {
+        // Simulate storing the data
+        console.log("User Data:", { name, email, password });
+
+        // Show success message
+        document.getElementById("successMsg").style.display = "block";
+        
+        // Redirect to home.html after 3 seconds
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 3000);
+      }
+    });
+  </script>
+
+</body>
+</html>

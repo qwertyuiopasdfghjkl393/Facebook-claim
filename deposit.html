@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Funds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1877f2;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .account-box {
+            background: #f0f2f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .account-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .copy-btn {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-btn:hover {
+            background: #166fe5;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            background: #42b72a;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background: #36a420;
+        }
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .min-amount {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .alert {
+            padding: 15px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Make Deposit</h1>
+        
+        <div class="account-box">
+            <h3>Bank Account 1</h3>
+            <div class="account-number" id="account1">6691219052</div>
+            <p>Account Name: FACEBOOK EARNINGS</p>
+            <button class="copy-btn" onclick="copyAccount('account1')">Copy Account Number</button>
+        </div>
+        
+        <div class="account-box">
+            <h3>Bank Account 2</h3>
+            <div class="account-number" id="account2">6027816530</div>
+            <p>Account Name: FACEBOOK EARNINGS</p>
+            <button class="copy-btn" onclick="copyAccount('account2')">Copy Account Number</button>
+        </div>
+        
+        <div class="form-group">
+            <label for="amount">Deposit Amount (₦)</label>
+            <input type="number" id="amount" placeholder="Enter amount" min="300">
+            <div class="min-amount">Minimum deposit: ₦300</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="proof">Upload Payment Proof</label>
+            <input type="file" id="proof" accept="image/*">
+        </div>
+        
+        <button id="submitBtn" class="submit-btn" disabled>Submit Deposit</button>
+        
+        <div id="successAlert" class="alert">
+            Deposit submitted successfully! Your account will be credited after verification.
+        </div>
+    </div>
+
+    <script>
+        const amountInput = document.getElementById('amount');
+        const proofInput = document.getElementById('proof');
+        const submitBtn = document.getElementById('submitBtn');
+        const successAlert = document.getElementById('successAlert');
+        
+        // Enable submit button only when requirements are met
+        function checkForm() {
+            const amount = parseInt(amountInput.value);
+            const hasProof = proofInput.files.length > 0;
+            
+            submitBtn.disabled = !(amount >= 300 && hasProof);
+        }
+        
+        amountInput.addEventListener('input', checkForm);
+        proofInput.addEventListener('change', checkForm);
+        
+        // Handle form submission
+        submitBtn.addEventListener('click', function() {
+            successAlert.style.display = 'block';
+            amountInput.value = '';
+            proofInput.value = '';
+            submitBtn.disabled = true;
+            
+            // Scroll to show success message
+            successAlert.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Copy account number function
+        function copyAccount(elementId) {
+            const accountNumber = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert('Account number copied to clipboard: ' + accountNumber);
+            });
+        }
+    </script>
+</body>
+</html>
